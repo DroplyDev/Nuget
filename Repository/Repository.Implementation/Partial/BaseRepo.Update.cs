@@ -3,7 +3,7 @@ using Repository.Interfaces;
 
 namespace Repository.Implementation
 {
-    public partial class BaseRepo<TContext, TEntity> : IBaseRepo<TEntity> where TEntity : class where TContext : DbContext
+    public partial class BaseRepo<TContext, TEntity> where TEntity : class where TContext : DbContext
     {
 
         public async Task UpdateAsync(TEntity entity)

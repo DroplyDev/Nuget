@@ -20,7 +20,7 @@ namespace Repository.Implementation
         public async Task DeleteAsync(object id)
         {
             var entity = await GetByIdAsync(id, CancellationToken.None)
-                         ?? throw new EntityNotFoundByIdException<TEntity>(id);
+                         ?? throw new NullReferenceException();
 
             DeleteNoSave(entity);
             await SaveChangesAsync();
