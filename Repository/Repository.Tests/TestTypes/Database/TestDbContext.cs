@@ -4,7 +4,7 @@ using Repository.Tests.TestTypes.Entities;
 
 namespace Repository.Tests.TestTypes.Database
 {
-    public class TestDbContext : DbContext, IDisposable
+    public class TestDbContext : DbContext, IAsyncDisposable
     {
         public DbSet<TestEntity> TestEntities { get; set; }
 
@@ -20,9 +20,11 @@ namespace Repository.Tests.TestTypes.Database
                 .Options;
         }
 
-        public void Dispose()
+        public override async ValueTask DisposeAsync()
         {
-            Database.EnsureDeleted();
+            // Perform async cleanup.
+            await Database.EnsureDeletedAsync();
         }
+
     }
 }
