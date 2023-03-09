@@ -4,6 +4,7 @@ using Repository.Tests.TestTypes.Repos;
 
 namespace Repository.Tests
 {
+    [TestCaseOrderer("Repository.Tests.CustomTestMethodOrderer", "Repository.Tests")]
     public class GetByIdTests
     {
         public GetByIdTests()
@@ -31,7 +32,7 @@ namespace Repository.Tests
         }
 
         [Fact]
-        public async Task IsRightType()
+        public async Task IsCorrectType()
         {
             using (var context = new TestDbContext())
             {
@@ -50,7 +51,7 @@ namespace Repository.Tests
         }
 
         [Fact]
-        public async Task IsCorrectEntity()
+        public async Task IsCorrectValue()
         {
             using (var context = new TestDbContext())
             {
