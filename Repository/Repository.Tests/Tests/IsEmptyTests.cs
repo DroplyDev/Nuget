@@ -8,46 +8,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Tests
+namespace Repository.Tests;
+
+public class IsEmptyTests
 {
-    public class IsEmptyTests
+
+    [Fact]
+    public async Task IsEmpty()
     {
+        await using var context = new TestDbContext();
+        // Creating repository
+        TestRepository testRepo = new TestRepository(context);
 
-        [Fact]
-        public async Task IsEmpty()
-        {
-            using (var context = new TestDbContext())
-            {
-                // Creating repository
-                TestRepository testRepo = new TestRepository(context);
+        // retrieve user from the repository
+        var isEmpty = await testRepo.IsEmptyAsync();
 
-                // retrieve user from the repository
-                var isEmpty = await testRepo.IsEmptyAsync();
+        // assert that the user is not null
+        Assert.True(isEmpty);
+    }
 
-                // assert that the user is not null
-                Assert.True(isEmpty);
-            }
-        }
+    [Fact]
+    public async Task IsNotEmpty()
+    {
+        await using var context = new TestDbContext();
+        // Creating repository
+        TestRepository testRepo = new TestRepository(context);
 
-        [Fact]
-        public async Task IsNotEmpty()
-        {
-            using (var context = new TestDbContext())
-            {
-                // Creating repository
-                TestRepository testRepo = new TestRepository(context);
+        // Add some entities to database
+        await context.AddAsync(new TestEntity { Id = 1, Name = "John" });
+        await context.AddAsync(new TestEntity { Id = 2, Name = "Jack" });
+        await testRepo.SaveChangesAsync();
 
-                // Add some entities to database
-                await context.AddAsync(new TestEntity { Id = 1, Name = "John" });
-                await context.AddAsync(new TestEntity { Id = 2, Name = "Jack" });
-                await testRepo.SaveChangesAsync();
+        // retrieve user from the repository
+        var isEmpty = await testRepo.IsEmptyAsync();
 
-                // retrieve user from the repository
-                var isEmpty = await testRepo.IsEmptyAsync();
-
-                // assert that the user is not null
-                Assert.False(isEmpty);
-            }
-        }
+        // assert that the user is not null
+        Assert.False(isEmpty);
     }
 }

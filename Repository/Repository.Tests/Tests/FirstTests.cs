@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Tests
+namespace Repository.Tests;
+
+internal class FirstTests
 {
-    internal class FirstTests
-    {
-    }
 }

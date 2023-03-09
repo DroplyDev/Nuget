@@ -1,18 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Interfaces;
 
-namespace Repository.Implementation
+namespace Repository.Implementation;
+
+public partial class BaseRepo<TContext, TEntity> : IBaseRepo<TEntity> where TEntity : class where TContext : DbContext
 {
-    public partial class BaseRepo<TContext, TEntity> : IBaseRepo<TEntity> where TEntity : class where TContext : DbContext
+    protected readonly TContext Context;
+    protected readonly DbSet<TEntity> DbSet;
+
+    protected BaseRepo(TContext context)
     {
-        protected readonly TContext Context;
-        protected readonly DbSet<TEntity> DbSet;
-
-        protected BaseRepo(TContext context)
-        {
-            Context = context;
-            DbSet = context.Set<TEntity>();
-        }
+        Context = context;
+        DbSet = context.Set<TEntity>();
     }
-
 }

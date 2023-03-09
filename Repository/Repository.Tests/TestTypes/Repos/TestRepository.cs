@@ -2,13 +2,12 @@
 using Repository.Implementation;
 using Repository.Tests.TestTypes.Entities;
 
-namespace Repository.Tests.TestTypes.Repos
-{
-    public class TestRepository : BaseRepo<DbContext, TestEntity>, ITestRepository
-    {
+namespace Repository.Tests.TestTypes.Repos;
 
-        public TestRepository(DbContext context) : base(context)
-        {
-        }
+public class TestRepository : BaseRepo<DbContext, TestEntity>, ITestRepository
+{
+
+    public TestRepository(DbContext context) : base(context)
+    {
     }
 }
