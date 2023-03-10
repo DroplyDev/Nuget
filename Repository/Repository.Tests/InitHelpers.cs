@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Repository.Tests;
 public static class InitHelpers
 {
-    public static async Task<TestEntity> InitTestEntityAsync(this DbContext context)
+    public static async Task<TestEntity> InitTestEntityAsync(this DbContext context, int id = 1, string name = "John")
     {
         var entity = new TestEntity
         {
-            Id = 1,
-            Name = "John"
+            Id = id,
+            Name = name
         };
         await context.AddAsync(entity);
         await context.SaveChangesAsync();
