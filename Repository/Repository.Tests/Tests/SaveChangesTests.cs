@@ -8,12 +8,11 @@ public class SaveChangesTests
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
         var entities = new List<TestEntity>
         {
             new() {Id = 1, Name = "Lucy"},
             new() {Id = 2, Name = "John"}
-
         };
         await context.AddRangeAsync(entities);
         //Act

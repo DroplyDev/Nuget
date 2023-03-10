@@ -8,7 +8,7 @@ public class GetByIdTests
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         var entity = await context.InitTestEntityAsync();
         var request = 1;
@@ -18,12 +18,13 @@ public class GetByIdTests
         response.Should().NotBeNull();
         response.Should().Be(entity);
     }
+
     [Fact]
     public async Task GetByIdAsync_Returns_Bull_When_EntityWithIdNotFound()
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         await context.InitTestEntityAsync();
         var request = 2;

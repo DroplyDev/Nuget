@@ -1,6 +1,4 @@
-﻿
-
-using Xunit.Abstractions;
+﻿using Xunit.Abstractions;
 
 namespace Repository.Tests;
 
@@ -13,8 +11,7 @@ public class RepositoryTestsClassOrderer : ITestCollectionOrderer
         "Repository.Tests.SaveChangesTests",
         "Repository.Tests.IsEmpty",
         "Repository.Tests.CreateTests",
-        "Repository.Tests.ExistsTests",
-
+        "Repository.Tests.ExistsTests"
     };
 
     public IEnumerable<ITestCollection> OrderTestCollections(IEnumerable<ITestCollection> testCollections)
@@ -23,11 +20,9 @@ public class RepositoryTestsClassOrderer : ITestCollectionOrderer
         foreach (var className in _classOrder)
         {
             var collection = testCollections.SingleOrDefault(x => x.DisplayName.Contains(className));
-            if (collection != null)
-            {
-                sortedCollections.Add(collection);
-            }
+            if (collection != null) sortedCollections.Add(collection);
         }
+
         return sortedCollections;
     }
 }

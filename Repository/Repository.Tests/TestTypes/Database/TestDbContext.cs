@@ -1,6 +1,6 @@
 ﻿namespace Repository.Tests.TestTypes.Database;
 
-public sealed class TestDbContext : DbContext, IAsyncDisposable
+public sealed class TestDbContext : DbContext
 {
     public TestDbContext() : base(GetOptions())
     {
@@ -8,10 +8,12 @@ public sealed class TestDbContext : DbContext, IAsyncDisposable
         Database.EnsureCreated();
     }
 
+    public DbSet<TestEntity> TestEntities { get; set; } = null!;
+
     private static DbContextOptions<DbContext> GetOptions()
     {
         return new DbContextOptionsBuilder<DbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options
             ;
     }
@@ -21,6 +23,4 @@ public sealed class TestDbContext : DbContext, IAsyncDisposable
         // Perform async cleanup.
         await Database.EnsureDeletedAsync();
     }
-
-    public DbSet<TestEntity> TestEntities { get; set; } = null!;
 }

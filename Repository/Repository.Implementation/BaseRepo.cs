@@ -3,7 +3,8 @@ using Repository.Interfaces;
 
 namespace Repository.Implementation;
 
-public partial class BaseRepo<TContext, TEntity> : IBaseRepo<TEntity> where TEntity : class where TContext : DbContext
+public abstract partial class BaseRepo<TContext, TEntity> : IBaseRepo<TEntity>
+    where TEntity : class where TContext : DbContext
 {
     protected readonly TContext Context;
     protected readonly DbSet<TEntity> DbSet;

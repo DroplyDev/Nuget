@@ -8,7 +8,7 @@ public class GetAllTests
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         var entities = await context.InitTestEntitiesAsync();
         //Act
@@ -16,12 +16,13 @@ public class GetAllTests
         //Assert
         response.Should().BeEquivalentTo(entities);
     }
+
     [Fact]
     public async Task GetAll_Returns_EmptyList_When_Empty()
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         //Act
         var response = await testRepo.GetAll().ToListAsync();

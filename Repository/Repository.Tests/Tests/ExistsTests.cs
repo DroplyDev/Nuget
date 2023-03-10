@@ -8,7 +8,7 @@ public class ExistsTests
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         var entity = await context.InitTestEntityAsync();
         //Act
@@ -16,12 +16,13 @@ public class ExistsTests
         //Assert
         response.Should().BeTrue();
     }
+
     [Fact]
     public async Task ExistsAsyncById_Returns_False_When_NotFound()
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         await context.InitTestEntityAsync();
         //Act
@@ -29,12 +30,13 @@ public class ExistsTests
         //Assert
         response.Should().BeFalse();
     }
+
     [Fact]
     public async Task ExistsAsyncByExpression_Returns_True_When_Ok()
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         var entity = await context.InitTestEntityAsync();
         //Act
@@ -42,12 +44,13 @@ public class ExistsTests
         //Assert
         response.Should().BeTrue();
     }
+
     [Fact]
     public async Task ExistsAsyncByExpression_Returns_False_When_NotFound()
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         await context.InitTestEntityAsync();
         //Act
@@ -55,12 +58,13 @@ public class ExistsTests
         //Assert
         response.Should().BeFalse();
     }
+
     [Fact]
     public async Task ExistsAsyncByEntity_Returns_True_When_Ok()
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         var entity = await context.InitTestEntityAsync();
         //Act
@@ -68,12 +72,13 @@ public class ExistsTests
         //Assert
         response.Should().BeTrue();
     }
+
     [Fact]
     public async Task ExistsAsyncByEntity_Returns_False_When_NotFound()
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         await context.InitTestEntityAsync();
 

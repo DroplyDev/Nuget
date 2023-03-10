@@ -9,7 +9,20 @@ namespace Repository.Interfaces;
 public partial interface IBaseRepo<TEntity> where TEntity : class
 {
     #region SaveChanges
+
     Task<int> SaveChangesAsync();
+
+    #endregion
+
+    #region GetAll
+
+    IQueryable<TEntity> GetAll();
+
+    #endregion
+
+    #region Where
+
+    IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
 
     #endregion
 
@@ -83,18 +96,6 @@ public partial interface IBaseRepo<TEntity> where TEntity : class
 
     Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default,
         Func<IQueryable<TEntity>, IQueryable<TEntity>>? includes = null);
-
-    #endregion
-
-    #region GetAll
-
-    IQueryable<TEntity> GetAll();
-
-    #endregion
-
-    #region Where
-
-    IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
 
     #endregion
 }

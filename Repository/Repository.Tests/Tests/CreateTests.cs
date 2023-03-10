@@ -8,7 +8,7 @@ public class CreateTests
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         var request = new TestEntity { Id = 1, Name = "John" };
         //Act
@@ -22,7 +22,7 @@ public class CreateTests
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
         var request = new TestEntity { Id = 1, Name = "John" };
         //Act
@@ -36,17 +36,17 @@ public class CreateTests
     {
         //Arrange
         await using var context = new TestDbContext();
-        TestRepository testRepo = new TestRepository(context);
+        var testRepo = new TestRepository(context);
 
-        var request = new List<TestEntity> {
-            new() { Id = 1, Name = "John"},
-            new() { Id = 2, Name = "Bob"},
-            new() { Id = 3, Name = "Lucy"}
+        var request = new List<TestEntity>
+        {
+            new() {Id = 1, Name = "John"},
+            new() {Id = 2, Name = "Bob"},
+            new() {Id = 3, Name = "Lucy"}
         };
         //Act
         var response = await testRepo.CreateRangeAsync(request);
         //Assert
         response.Should().BeEquivalentTo(request);
     }
-
 }
