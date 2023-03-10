@@ -6,7 +6,7 @@ namespace Repository.Tests;
 
 public class RepositoryTestsClassOrderer : ITestCollectionOrderer
 {
-    private readonly List<string> _classOrder = new List<string>
+    private readonly List<string> _classOrder = new()
     {
         "Repository.Tests.GetById",
         "Repository.Tests.GetAllTests",

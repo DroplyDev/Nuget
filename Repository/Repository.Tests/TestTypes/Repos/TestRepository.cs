@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Repository.Implementation;
-using Repository.Tests.TestTypes.Entities;
+﻿using Repository.Implementation;
 
 namespace Repository.Tests.TestTypes.Repos;
 

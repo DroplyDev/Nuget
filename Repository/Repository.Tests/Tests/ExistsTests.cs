@@ -1,117 +1,85 @@
-﻿using Repository.Tests.TestTypes.Database;
-using Repository.Tests.TestTypes.Entities;
-using Repository.Tests.TestTypes.Repos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository.Tests;
+﻿namespace Repository.Tests;
 
 [TestCaseOrderer("Repository.Tests.CustomTestMethodOrderer", "Repository.Tests")]
 public class ExistsTests
 {
     [Fact]
-    public async Task ConditionById()
+    public async Task ExistsAsyncById_Returns_True_When_Ok()
     {
+        //Arrange
         await using var context = new TestDbContext();
-        // Creating repository
         TestRepository testRepo = new TestRepository(context);
 
-        // Add some entities to database
-        await testRepo.CreateAsync(new TestEntity { Id = 1, Name = "John" });
-
-        // retrieve user from the repository
-        var isExists = await testRepo.ExistsAsync(1);
-
-        // assert that the user is not null
-        Assert.True(isExists);
+        var entity = await context.InitTestEntityAsync();
+        //Act
+        var response = await testRepo.ExistsAsync(entity.Id);
+        //Assert
+        response.Should().BeTrue();
     }
-
     [Fact]
-    public async Task ConditionByName()
+    public async Task ExistsAsyncById_Returns_False_When_NotFound()
     {
+        //Arrange
         await using var context = new TestDbContext();
-        // Creating repository
         TestRepository testRepo = new TestRepository(context);
 
-        // Add some entities to database
-        await testRepo.CreateAsync(new TestEntity { Id = 1, Name = "John" });
-
-        // retrieve user from the repository
-        var isExists = await testRepo.ExistsAsync(e => e.Name == "John");
-
-        // assert that the user is not null
-        Assert.True(isExists);
+        await context.InitTestEntityAsync();
+        //Act
+        var response = await testRepo.ExistsAsync(2);
+        //Assert
+        response.Should().BeFalse();
     }
-
     [Fact]
-    public async Task ConditionByEntity()
+    public async Task ExistsAsyncByExpression_Returns_True_When_Ok()
     {
+        //Arrange
         await using var context = new TestDbContext();
-        // Creating repository
         TestRepository testRepo = new TestRepository(context);
 
-        // Add some entities to database
-        var entity = new TestEntity { Id = 1, Name = "John" };
-        await testRepo.CreateAsync(entity);
-
-        // retrieve user from the repository
-        var isExists = await testRepo.ExistsAsync(entity);
-
-        // assert that the user is not null
-        Assert.True(isExists);
+        var entity = await context.InitTestEntityAsync();
+        //Act
+        var response = await testRepo.ExistsAsync(e => e.Name == entity.Name);
+        //Assert
+        response.Should().BeTrue();
     }
-
     [Fact]
-    public async Task WrongConditionById()
+    public async Task ExistsAsyncByExpression_Returns_False_When_NotFound()
     {
+        //Arrange
         await using var context = new TestDbContext();
-        // Creating repository
         TestRepository testRepo = new TestRepository(context);
 
-        // Add some entities to database
-        await testRepo.CreateAsync(new TestEntity { Id = 1, Name = "John" });
-
-        // retrieve user from the repository
-        var isExists = await testRepo.ExistsAsync(2);
-
-        // assert that the user is not null
-        Assert.False(isExists);
+        await context.InitTestEntityAsync();
+        //Act
+        var response = await testRepo.ExistsAsync(e => e.Name == "WrongName");
+        //Assert
+        response.Should().BeFalse();
     }
-
     [Fact]
-    public async Task WrongConditionByName()
+    public async Task ExistsAsyncByEntity_Returns_True_When_Ok()
     {
+        //Arrange
         await using var context = new TestDbContext();
-        // Creating repository
         TestRepository testRepo = new TestRepository(context);
 
-        // Add some entities to database
-        await testRepo.CreateAsync(new TestEntity { Id = 1, Name = "John" });
-
-        // retrieve user from the repository
-        var isExists = await testRepo.ExistsAsync(e => e.Name == "Lucy");
-
-        // assert that the user is not null
-        Assert.False(isExists);
+        var entity = await context.InitTestEntityAsync();
+        //Act
+        var response = await testRepo.ExistsAsync(entity);
+        //Assert
+        response.Should().BeTrue();
     }
-
     [Fact]
-    public async Task WrongConditionByEntity()
+    public async Task ExistsAsyncByEntity_Returns_False_When_NotFound()
     {
+        //Arrange
         await using var context = new TestDbContext();
-        // Creating repository
         TestRepository testRepo = new TestRepository(context);
 
-        // Add some entities to database
-        await testRepo.CreateAsync(new TestEntity { Id = 1, Name = "John" });
+        await context.InitTestEntityAsync();
 
-        // retrieve user from the repository
-        var isExists = await testRepo.ExistsAsync(new TestEntity { Id = 2, Name = "Bob" });
-
-        // assert that the user is not null
-        Assert.False(isExists);
+        //Act
+        var response = await testRepo.ExistsAsync(new TestEntity { Id = 2, Name = "WrongName" });
+        //Assert
+        response.Should().BeFalse();
     }
 }

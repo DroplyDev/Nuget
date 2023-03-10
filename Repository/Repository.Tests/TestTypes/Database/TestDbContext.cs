@@ -1,10 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Repository.Tests.TestTypes.Entities;
+﻿namespace Repository.Tests.TestTypes.Database;
 
-
-namespace Repository.Tests.TestTypes.Database;
-
-public class TestDbContext : DbContext, IAsyncDisposable
+public sealed class TestDbContext : DbContext, IAsyncDisposable
 {
     public TestDbContext() : base(GetOptions())
     {
@@ -23,8 +19,8 @@ public class TestDbContext : DbContext, IAsyncDisposable
     public override async ValueTask DisposeAsync()
     {
         // Perform async cleanup.
-        Database.EnsureDeleted();
+        await Database.EnsureDeletedAsync();
     }
 
-    public DbSet<TestEntity> TestEntities { get; set; }
+    public DbSet<TestEntity> TestEntities { get; set; } = null!;
 }

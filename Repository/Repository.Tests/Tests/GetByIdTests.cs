@@ -10,8 +10,7 @@ public class GetByIdTests
         await using var context = new TestDbContext();
         TestRepository testRepo = new TestRepository(context);
 
-        var entity = new TestEntity { Id = 1, Name = "John" };
-        await context.AddAsync(entity);
+        var entity = await context.InitTestEntityAsync();
         var request = 1;
         //Act
         var response = await testRepo.GetByIdAsync(request);
@@ -26,8 +25,7 @@ public class GetByIdTests
         await using var context = new TestDbContext();
         TestRepository testRepo = new TestRepository(context);
 
-        var entity = new TestEntity { Id = 1, Name = "John" };
-        await context.AddAsync(entity);
+        await context.InitTestEntityAsync();
         var request = 2;
         //Act
         var response = await testRepo.GetByIdAsync(request);

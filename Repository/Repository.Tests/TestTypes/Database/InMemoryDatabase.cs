@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Update;
-using Repository.Tests.TestTypes.Entities;
 using System.Linq.Expressions;
 
 

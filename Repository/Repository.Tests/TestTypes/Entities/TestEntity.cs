@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Repository.Tests.TestTypes.Entities;
+﻿namespace Repository.Tests.TestTypes.Entities;
 
 public class TestEntity
 {
