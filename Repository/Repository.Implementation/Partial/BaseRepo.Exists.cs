@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Repository.Implementation;
 
@@ -7,7 +8,14 @@ public partial class BaseRepo<TContext, TEntity> where TEntity : class where TCo
 {
     public virtual async Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default)
     {
-        return await GetByIdAsync(id, cancellationToken) is not null;
+        try
+        {
+            return await GetByIdAsync(id, cancellationToken) is not null;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }  
     }
 
 

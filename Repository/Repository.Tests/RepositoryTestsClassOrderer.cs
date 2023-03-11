@@ -11,7 +11,13 @@ public class RepositoryTestsClassOrderer : ITestCollectionOrderer
         "Repository.Tests.SaveChangesTests",
         "Repository.Tests.IsEmpty",
         "Repository.Tests.CreateTests",
-        "Repository.Tests.ExistsTests"
+        "Repository.Tests.ExistsTests",
+        "Repository.Tests.DeleteTests",
+        "Repository.Tests.WhereTests",
+        "Repository.Tests.FirstTests",
+        "Repository.Tests.UpdateTests",
+        "Repository.Tests.AttachTests",
+
     };
 
     public IEnumerable<ITestCollection> OrderTestCollections(IEnumerable<ITestCollection> testCollections)

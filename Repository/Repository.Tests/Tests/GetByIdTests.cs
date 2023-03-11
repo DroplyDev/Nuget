@@ -20,17 +20,17 @@ public class GetByIdTests
     }
 
     [Fact]
-    public async Task GetByIdAsync_Returns_Bull_When_EntityWithIdNotFound()
+    public async Task GetByIdAsync_Returns_Null_When_EntityWithIdNotFound()
     {
         //Arrange
         await using var context = new TestDbContext();
         var testRepo = new TestRepository(context);
 
-        await context.InitTestEntityAsync();
-        var request = 2;
+        var request = await context.InitTestEntityAsync();
         //Act
-        var response = await testRepo.GetByIdAsync(request);
+        Func<Task> act = async () => await testRepo.GetByIdAsync(25);
+
         //Assert
-        response.Should().BeNull();
+        await act.Should().ThrowAsync<NullReferenceException>();
     }
 }

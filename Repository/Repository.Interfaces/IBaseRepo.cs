@@ -8,28 +8,10 @@ namespace Repository.Interfaces;
 
 public partial interface IBaseRepo<TEntity> where TEntity : class
 {
-    #region SaveChanges
+    #region Attach
 
-    Task<int> SaveChangesAsync();
-
-    #endregion
-
-    #region GetAll
-
-    IQueryable<TEntity> GetAll();
-
-    #endregion
-
-    #region Where
-
-    IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
-
-    #endregion
-
-    #region GetById
-
-    Task<TEntity?> GetByIdAsync(object id, CancellationToken cancellationToken = default);
-    TEntity? GetById(object id);
+    Task AttachAsync(TEntity entity);
+    Task AttachRangeAsync(IEnumerable<TEntity> entities);
 
     #endregion
 
@@ -38,17 +20,6 @@ public partial interface IBaseRepo<TEntity> where TEntity : class
     Task<TEntity> CreateAsync(TEntity entity);
     Task<IEnumerable<TEntity>> CreateRangeAsync(IEnumerable<TEntity> entities);
     Task CreateNoSaveAsync(TEntity entity);
-
-    #endregion
-
-    #region Update
-
-    Task UpdateAsync(TEntity entity);
-    void UpdateNoSave(TEntity entity);
-    Task UpdateRangeAsync(IEnumerable<TEntity> entities);
-    void UpdateRangeNoSave(IEnumerable<TEntity> entities);
-    void Attach(TEntity entity);
-    void AttachRange(IEnumerable<TEntity> entities);
 
     #endregion
 
@@ -62,7 +33,6 @@ public partial interface IBaseRepo<TEntity> where TEntity : class
 
     #endregion
 
-
     #region Exists
 
     Task<bool> ExistsAsync(object id, CancellationToken cancellationToken = default);
@@ -70,14 +40,6 @@ public partial interface IBaseRepo<TEntity> where TEntity : class
     Task<bool> ExistsAsync(TEntity entity, CancellationToken cancellationToken = default);
 
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
-
-    #endregion
-
-    #region IsEmpty
-
-    Task<bool> IsEmptyAsync(CancellationToken cancellationToken = default);
-
-    Task<bool> IsEmptyAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
 
     #endregion
 
@@ -96,6 +58,48 @@ public partial interface IBaseRepo<TEntity> where TEntity : class
 
     Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default,
         Func<IQueryable<TEntity>, IQueryable<TEntity>>? includes = null);
+
+    #endregion
+
+    #region GetAll
+
+    IQueryable<TEntity> GetAll();
+
+    #endregion
+
+    #region GetById
+
+    Task<TEntity?> GetByIdAsync(object id, CancellationToken cancellationToken = default);
+    TEntity? GetById(object id);
+
+    #endregion
+
+    #region IsEmpty
+
+    Task<bool> IsEmptyAsync(CancellationToken cancellationToken = default);
+
+    Task<bool> IsEmptyAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
+
+    #endregion
+
+    #region SaveChanges
+
+    Task<int> SaveChangesAsync();
+
+    #endregion
+
+    #region Update
+
+    Task UpdateAsync(TEntity entity);
+    void UpdateNoSave(TEntity entity);
+    Task UpdateRangeAsync(IEnumerable<TEntity> entities);
+    void UpdateRangeNoSave(IEnumerable<TEntity> entities);
+
+    #endregion
+
+    #region Where
+
+    IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
 
     #endregion
 }
