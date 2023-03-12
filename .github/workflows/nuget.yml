@@ -31,17 +31,8 @@ jobs:
     - name: 'Build project Implementation'
       run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
 
-    - name: 'Build project Interface'
-      run: dotnet build ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --configuration Release
-
     - name: 'Pack project Implementation'
-      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.2' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY_IMPLEMENTATION }}
-
-    - name: 'Pack project Implementation'
-      run: dotnet pack ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.2' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY_INTERFACES }}
+      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.3' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY_IMPLEMENTATION }}
 
     - name: 'Push package Implementation'
       run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY_IMPLEMENTATION }}\*.nupkg -k oy2adyglhhnlwk4yru5ae2ulh2xct2au7ljtikcm5saooi -s ${{ env.NUGET_SOURCE_URL }}
-
-    - name: 'Push package Implementation'
-      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY_INTERFACES }}\*.nupkg -k oy2adyglhhnlwk4yru5ae2ulh2xct2au7ljtikcm5saooi -s ${{ env.NUGET_SOURCE_URL }}
