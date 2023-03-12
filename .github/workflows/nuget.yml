@@ -33,12 +33,8 @@ jobs:
     - name: 'Build project Interface'
       run: dotnet build ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --configuration Release
 
-    - name: 'Get Version'
-      id: version
-      uses: battila7/get-version-action@v2
-
     - name: 'Pack project Implementation'
-      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.1' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
     - name: 'Pack project Implementation'
       run: dotnet pack ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
