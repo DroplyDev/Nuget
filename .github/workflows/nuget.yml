@@ -5,7 +5,8 @@ on: ["push"]
 env:
   PROJECT_PATH: 'Repository\Repository.Implementation\Repository.Implementation.csproj'
   PROJECT_INTERFACE_PATH: 'Repository\Repository.Interfaces\Repository.Interfaces.csproj'
-  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
+  PACKAGE_OUTPUT_DIRECTORY_IMPLEMENTATION: ${{ github.workspace }}\output\implementation
+  PACKAGE_OUTPUT_DIRECTORY_INTERFACES: ${{ github.workspace }}\output\interfaces
   NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
 
 jobs:
@@ -34,10 +35,13 @@ jobs:
       run: dotnet build ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --configuration Release
 
     - name: 'Pack project Implementation'
-      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.1' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.1' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY_IMPLEMENTATION }}
 
     - name: 'Pack project Implementation'
-      run: dotnet pack ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.1' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+      run: dotnet pack ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion='0.0.1' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY_INTERFACES }}
 
     - name: 'Push package Implementation'
-      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k oy2adyglhhnlwk4yru5ae2ulh2xct2au7ljtikcm5saooi -s ${{ env.NUGET_SOURCE_URL }}
+      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY_IMPLEMENTATION }}\*.nupkg -k oy2adyglhhnlwk4yru5ae2ulh2xct2au7ljtikcm5saooi -s ${{ env.NUGET_SOURCE_URL }}
+
+    - name: 'Push package Implementation'
+      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY_INTERFACES }}\*.nupkg -k oy2adyglhhnlwk4yru5ae2ulh2xct2au7ljtikcm5saooi -s ${{ env.NUGET_SOURCE_URL }}
