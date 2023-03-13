@@ -34,7 +34,7 @@ jobs:
     - name: 'Build project Interface'
       run: dotnet build ${{ env.PROJECT_INTERFACE_PATH }} --no-restore --configuration Release
 
-    - name:
+    - name: 'Pack package Implementation'
       run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols --include-referenced-projects -p:PackageVersion='0.0.6' --output ${{ env.PACKAGE_OUTPUT_DIRECTORY_IMPLEMENTATION }} 
 
     - name: 'Push package Implementation'
