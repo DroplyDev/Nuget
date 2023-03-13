@@ -15,7 +15,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: edumserrano/nuget-push@v1.2.2
     - name: Build and Pack projects
       run: |
         for file in $(find . -name '*.csproj' ! -name '*test.csproj'); do 
