@@ -28,4 +28,4 @@ jobs:
       with:
         nuget-api-key: oy2adyglhhnlwk4yru5ae2ulh2xct2au7ljtikcm5saooi
         nuget-source: https://api.nuget.org/v3/index.json
-        nuget-packages: **/*.nupkg
+        nuget-packages: '**/*.nupkg'
