@@ -4,7 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.0.5<Version>
+    <Year>$([System.DateTime]::UtcNow.ToString("yy"))</Year>
+    <Month>$([System.DateTime]::UtcNow.ToString("MM"))</Month>
+    <Date>$([System.DateTime]::UtcNow.ToString("dd"))</Date>
+    <Time>$([System.DateTime]::UtcNow.ToString("HHmm"))</Time>
+    <Version>$(Year).$(Month).$(Date).$(Time)</Version>
   </PropertyGroup>
 
 </Project>
