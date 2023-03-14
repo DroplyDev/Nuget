@@ -32,17 +32,6 @@ jobs:
         with:
           dotnet-version: 7.0.x
 
-      - name: Restore dependencies
-        run: dotnet restore **/*.csproj
-
-      - name: Build
-        run: dotnet build **/*.csproj
-
-      - id: is-public-release
-        uses: ASzc/change-string-case-action@v2
-        with:
-          string: ${{ steps.nbgv.outputs.PublicRelease }}
-
       # Publish
       - name: Build, Pack & Publish
         id: publish_nuget
